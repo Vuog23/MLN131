@@ -1862,23 +1862,23 @@
             // Call Groq API
             try {
                 const response = await fetch("/api/chat", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        messages: [
-            {
-                role: "system",
-                content: "Bạn là trợ lý AI chuyên về Chủ nghĩa Xã hội Khoa học, đặc biệt là Liên minh Công - Nông - Trí trong công cuộc CNH-HĐH Việt Nam."
-            },
-            {
-                role: "user",
-                content: message
-            }
-        ]
-    })
-});
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        messages: [
+                            {
+                                role: "system",
+                                content: "Bạn là trợ lý AI chuyên về Chủ nghĩa Xã hội Khoa học, đặc biệt là Liên minh Công - Nông - Trí trong công cuộc CNH-HĐH Việt Nam."
+                            },
+                            {
+                                role: "user",
+                                content: message
+                            }
+                        ]
+                    })
+                });
                 
 
                 const data = await response.json();
@@ -2040,24 +2040,26 @@
             output.classList.remove('active');
 
             try {
+                const fullPrompt = aiTools[toolType].prompt + inputText;
+                
                 const response = await fetch("/api/chat", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        messages: [
-            {
-                role: "system",
-                content: "Bạn là trợ lý AI chuyên về Chủ nghĩa Xã hội Khoa học, đặc biệt là Liên minh Công - Nông - Trí trong công cuộc CNH-HĐH Việt Nam."
-            },
-            {
-                role: "user",
-                content: message
-            }
-        ]
-    })
-});             
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        messages: [
+                            {
+                                role: "system",
+                                content: "Bạn là trợ lý AI chuyên về Chủ nghĩa Xã hội Khoa học, đặc biệt là Liên minh Công - Nông - Trí trong công cuộc CNH-HĐH Việt Nam."
+                            },
+                            {
+                                role: "user",
+                                content: fullPrompt
+                            }
+                        ]
+                    })
+                });             
 
                 const data = await response.json();
                 loading.classList.remove('active');
