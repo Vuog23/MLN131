@@ -1833,19 +1833,6 @@
     </footer>
 
     <script>
-        // ===== GROQ API CONFIGURATION =====
-        // Thay YOUR_GROQ_API_KEY_HERE bằng API key của bạn từ https://console.groq.com
-        // const GROQ_API_KEY = 'YOUR_GROQ_API_KEY_HERE';
-        
-        // Kiểm tra API key
-        if (GROQ_API_KEY === 'YOUR_GROQ_API_KEY_HERE') {
-            console.warn('⚠️ CẢNH BÁO: Bạn chưa cấu hình API key Groq!');
-            console.log('📝 Hướng dẫn:');
-            console.log('1. Truy cập https://console.groq.com');
-            console.log('2. Tạo API key mới');
-            console.log('3. Thay thế YOUR_GROQ_API_KEY_HERE trong code bằng API key của bạn');
-        }
-
         // Chatbot functionality
         function toggleChatbot() {
             const chatWindow = document.getElementById('chatbotWindow');
@@ -1863,12 +1850,6 @@
             const message = input.value.trim();
             
             if (!message) return;
-
-            // Check API key
-            if (GROQ_API_KEY === 'YOUR_GROQ_API_KEY_HERE') {
-                addMessage('⚠️ Quản trị viên chưa cấu hình API key Groq. Vui lòng liên hệ quản trị viên để kích hoạt tính năng này.', 'bot');
-                return;
-            }
 
             // Add user message
             addMessage(message, 'user');
@@ -2048,11 +2029,6 @@
             
             if (!inputText) {
                 alert('Vui lòng nhập nội dung!');
-                return;
-            }
-
-            if (GROQ_API_KEY === 'YOUR_GROQ_API_KEY_HERE') {
-                alert('⚠️ Quản trị viên chưa cấu hình API key Groq!\n\nVui lòng liên hệ quản trị viên để kích hoạt tính năng AI.');
                 return;
             }
 
