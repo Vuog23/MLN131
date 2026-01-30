@@ -1835,7 +1835,7 @@
     <script>
         // ===== GROQ API CONFIGURATION =====
         // Thay YOUR_GROQ_API_KEY_HERE bằng API key của bạn từ https://console.groq.com
-        const GROQ_API_KEY = 'YOUR_GROQ_API_KEY_HERE';
+        // const GROQ_API_KEY = 'YOUR_GROQ_API_KEY_HERE';
         
         // Kiểm tra API key
         if (GROQ_API_KEY === 'YOUR_GROQ_API_KEY_HERE') {
@@ -1880,30 +1880,25 @@
 
             // Call Groq API
             try {
-                const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${GROQ_API_KEY}`
-                    },
-                    body: JSON.stringify({
-                        model: 'llama-3.3-70b-versatile',
-                        messages: [
-                            {
-                                role: 'system',
-                                content: 'Bạn là trợ lý AI chuyên về Chủ nghĩa Xã hội Khoa học, đặc biệt là về Liên minh Công - Nông - Trí trong công cuộc công nghiệp hóa, hiện đại hóa Việt Nam. Hãy trả lời một cách súc tích, dễ hiểu và chính xác.'
-                            },
-                            {
-                                role: 'user',
-                                content: `Hãy trả lời câu hỏi sau về Chủ nghĩa Xã hội Khoa học:
-
-Câu hỏi: ${message}`
-                            }
-                        ],
-                        temperature: 0.7,
-                        max_tokens: 1000
-                    })
-                });
+                const response = await fetch("/api/chat", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        messages: [
+            {
+                role: "system",
+                content: "Bạn là trợ lý AI chuyên về Chủ nghĩa Xã hội Khoa học, đặc biệt là Liên minh Công - Nông - Trí trong công cuộc CNH-HĐH Việt Nam."
+            },
+            {
+                role: "user",
+                content: message
+            }
+        ]
+    })
+});
+                
 
                 const data = await response.json();
                 typingIndicator.classList.remove('active');
@@ -2069,28 +2064,24 @@ Câu hỏi: ${message}`
             output.classList.remove('active');
 
             try {
-                const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${GROQ_API_KEY}`
-                    },
-                    body: JSON.stringify({
-                        model: 'llama-3.3-70b-versatile',
-                        messages: [
-                            {
-                                role: 'system',
-                                content: 'Bạn là chuyên gia về Chủ nghĩa Xã hội Khoa học. Hãy trả lời một cách chi tiết, dễ hiểu và có giá trị học thuật.'
-                            },
-                            {
-                                role: 'user',
-                                content: aiTools[toolType].prompt + inputText
-                            }
-                        ],
-                        temperature: 0.7,
-                        max_tokens: 2000
-                    })
-                });
+                const response = await fetch("/api/chat", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        messages: [
+            {
+                role: "system",
+                content: "Bạn là trợ lý AI chuyên về Chủ nghĩa Xã hội Khoa học, đặc biệt là Liên minh Công - Nông - Trí trong công cuộc CNH-HĐH Việt Nam."
+            },
+            {
+                role: "user",
+                content: message
+            }
+        ]
+    })
+});             
 
                 const data = await response.json();
                 loading.classList.remove('active');
