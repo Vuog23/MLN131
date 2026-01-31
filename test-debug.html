@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Debug</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #cc0000;
+        }
+        button {
+            background: #cc0000;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #990000;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background: #f8f9fa;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .step {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #ffc107;
+        }
+        .step h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Debug API Groq - Kiểm Tra Chi Tiết</h1>
+        
+        <div class="step">
+            <h3>Bước 1: Kiểm tra endpoint có tồn tại không</h3>
+            <button onclick="testEndpoint()">Test Endpoint</button>
+        </div>
+
+        <div class="step">
+            <h3>Bước 2: Gửi request thực tế</h3>
+            <input type="text" id="testMessage" placeholder="Nhập tin nhắn test..." value="Xin chào">
+            <button onclick="testAPI()">Gửi Request</button>
+        </div>
+
+        <div class="step">
+            <h3>Bước 3: Xem Console Log</h3>
+            <p>Nhấn F12 → Tab Console để xem log chi tiết</p>
+        </div>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        const resultDiv = document.getElementById('result');
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'error' ? 'red' : type === 'success' ? 'green' : 'blue';
+            console.log(`[${timestamp}] ${message}`);
+            resultDiv.innerHTML += `<div style="color: ${color}">[${timestamp}] ${message}</div>`;
+        }
+
+        async function testEndpoint() {
+            resultDiv.innerHTML = '';
+            log('🔍 Đang kiểm tra endpoint /api/chat...');
+            
+            try {
+                // Test OPTIONS request (CORS preflight)
+                log('Gửi OPTIONS request...');
+                const optionsResponse = await fetch('/api/chat', {
+                    method: 'OPTIONS'
+                });
+                log(`✅ OPTIONS response: ${optionsResponse.status}`, 'success');
+                
+                // Test GET request (should return 405)
+                log('Gửi GET request (nên trả về 405)...');
+                const getResponse = await fetch('/api/chat', {
+                    method: 'GET'
+                });
+                log(`📝 GET response: ${getResponse.status} ${getResponse.status === 405 ? '✅ Đúng!' : '❌ Sai!'}`, getResponse.status === 405 ? 'success' : 'error');
+                
+                log('✅ Endpoint hoạt động bình thường!', 'success');
+                
+            } catch (error) {
+                log(`❌ LỖI: ${error.message}`, 'error');
+                log(`Chi tiết: ${error.stack}`, 'error');
+            }
+        }
+
+        async function testAPI() {
+            resultDiv.innerHTML = '';
+            const message = document.getElementById('testMessage').value;
+            
+            log('🚀 Bắt đầu test API...');
+            log(`📝 Tin nhắn: "${message}"`);
+            
+            const requestBody = {
+                messages: [
+                    {
+                        role: "user",
+                        content: message
+                    }
+                ]
+            };
+            
+            log('📤 Request body:');
+            log(JSON.stringify(requestBody, null, 2));
+            
+            try {
+                log('⏳ Đang gửi request...');
+                
+                const startTime = Date.now();
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                const endTime = Date.now();
+                
+                log(`⏱️ Response time: ${endTime - startTime}ms`);
+                log(`📊 Status: ${response.status} ${response.statusText}`);
+                
+                // Log response headers
+                log('📋 Response Headers:');
+                response.headers.forEach((value, key) => {
+                    log(`  ${key}: ${value}`);
+                });
+                
+                // Get response text first
+                const responseText = await response.text();
+                log('📥 Response body (raw):');
+                log(responseText);
+                
+                // Try to parse as JSON
+                let data;
+                try {
+                    data = JSON.parse(responseText);
+                    log('✅ Response là JSON hợp lệ');
+                } catch (e) {
+                    log('❌ Response KHÔNG PHẢI JSON!', 'error');
+                    log(`Parse error: ${e.message}`, 'error');
+                    return;
+                }
+                
+                if (!response.ok) {
+                    log(`❌ HTTP Error ${response.status}`, 'error');
+                    log('Error detail:', 'error');
+                    log(JSON.stringify(data, null, 2), 'error');
+                    
+                    // Specific error messages
+                    if (response.status === 500 && data.detail && data.detail.includes('GROQ_API_KEY')) {
+                        log('', 'error');
+                        log('🔑 GROQ_API_KEY CHƯA ĐƯỢC CÀI ĐẶT!', 'error');
+                        log('Cách sửa:', 'error');
+                        log('1. Vào Vercel Dashboard → Project Settings', 'error');
+                        log('2. Environment Variables → Add New', 'error');
+                        log('3. Name: GROQ_API_KEY', 'error');
+                        log('4. Value: <your-api-key-from-console.groq.com>', 'error');
+                        log('5. Environments: Chọn ALL (Production, Preview, Development)', 'error');
+                        log('6. Save → Redeploy project', 'error');
+                    }
+                    
+                    return;
+                }
+                
+                log('✅ SUCCESS!', 'success');
+                log('📦 Response data:');
+                log(JSON.stringify(data, null, 2), 'success');
+                
+                if (data.choices && data.choices[0] && data.choices[0].message) {
+                    log('', 'success');
+                    log('💬 AI Response:', 'success');
+                    log(data.choices[0].message.content, 'success');
+                }
+                
+            } catch (error) {
+                log('❌ EXCEPTION!', 'error');
+                log(`Error type: ${error.name}`, 'error');
+                log(`Error message: ${error.message}`, 'error');
+                log(`Error stack:`, 'error');
+                log(error.stack, 'error');
+                
+                if (error.message.includes('Failed to fetch')) {
+                    log('', 'error');
+                    log('🔴 "Failed to fetch" có thể do:', 'error');
+                    log('1. Function bị crash (xem Vercel Function Logs)', 'error');
+                    log('2. GROQ_API_KEY chưa được set', 'error');
+                    log('3. Network/CORS issue', 'error');
+                    log('4. File api/chat.js không tồn tại hoặc syntax error', 'error');
+                }
+            }
+        }
+
+        // Auto-run test on load
+        window.addEventListener('load', () => {
+            log('🎯 Trang đã load. Click nút để test!');
+            log(`📍 Current URL: ${window.location.href}`);
+            log(`📍 API URL sẽ là: ${window.location.origin}/api/chat`);
+        });
+    </script>
+</body>
+</html>
