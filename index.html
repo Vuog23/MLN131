@@ -232,168 +232,114 @@
         .hero::after {
             content: '';
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(255, 215, 0, 0.05) 10px,
-                rgba(255, 215, 0, 0.05) 20px
-            );
-            animation: stripeMove 20s linear infinite;
-        }
-
-        @keyframes stripeMove {
-            from { background-position: 0 0; }
-            to { background-position: 100px 100px; }
+            height: 30%;
+            background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
         }
 
         .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
-            font-weight: 900;
-            letter-spacing: 2px;
-            animation: titleGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes titleGlow {
-            0%, 100% { text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 20px rgba(255,215,0,0.3); }
-            50% { text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 40px rgba(255,215,0,0.6); }
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            animation: slideInDown 1s ease-out;
         }
 
         .hero p {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             margin-bottom: 2rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            font-weight: 600;
+            animation: slideInUp 1s ease-out;
         }
 
-        .cta-button {
-            background: linear-gradient(135deg, var(--gold) 0%, #ffed4e 100%);
-            color: var(--communist-red);
-            padding: 1.2rem 3rem;
-            border: 3px solid var(--communist-red);
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 900;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 6px 20px rgba(204, 0, 0, 0.4);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Sections */
+        .section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(204, 0, 0, 0.15);
+            border-top: 4px solid var(--communist-red);
             position: relative;
             overflow: hidden;
         }
 
-        .cta-button::before {
-            content: '';
+        .section::before {
+            content: '⚙️';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+            top: -30px;
+            right: -30px;
+            font-size: 10rem;
+            opacity: 0.05;
+            transform: rotate(20deg);
         }
 
-        .cta-button:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(204, 0, 0, 0.6);
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        .section {
-            margin-bottom: 4rem;
-            animation: fadeIn 1s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section-title {
-            font-size: 2.5rem;
+        .section h2 {
             color: var(--communist-red);
-            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
             position: relative;
             padding-bottom: 1rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        .section-title::after {
+        .section h2::after {
             content: '';
             position: absolute;
             bottom: 0;
-            left: 0;
-            width: 150px;
-            height: 5px;
-            background: linear-gradient(90deg, var(--communist-red) 0%, var(--gold) 100%);
-            animation: expandLine 2s ease-in-out infinite;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--communist-red), var(--gold));
         }
 
-        @keyframes expandLine {
-            0%, 100% { width: 150px; }
-            50% { width: 200px; }
-        }
-
-        .section-title::before {
-            content: '★';
-            color: var(--gold);
-            margin-right: 1rem;
-            font-size: 2rem;
-            vertical-align: middle;
-            animation: starRotate 4s linear infinite;
-            display: inline-block;
-        }
-
-        @keyframes starRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Three Pillars */
-        .pillars {
+        /* Three Pillars Grid */
+        .pillars-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin: 3rem 0;
+            margin-top: 2rem;
         }
 
         .pillar-card {
-            background: white;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(204, 0, 0, 0.2);
-            transition: all 0.3s;
-            border-top: 5px solid var(--communist-red);
-            border-left: 2px solid var(--gold);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
             position: relative;
             overflow: hidden;
         }
@@ -401,468 +347,148 @@
         .pillar-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
-            animation: rotateGlow 10s linear infinite;
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--communist-red), var(--gold));
+            transform: scaleX(0);
+            transition: transform 0.4s;
         }
 
-        @keyframes rotateGlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .pillar-card:hover::before {
+            transform: scaleX(1);
         }
 
         .pillar-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(204, 0, 0, 0.4);
-            border-top-width: 8px;
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(204, 0, 0, 0.25);
+            border-color: var(--gold);
         }
 
         .pillar-icon {
             font-size: 4rem;
             margin-bottom: 1rem;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .pillar-card h3 {
+            color: var(--communist-red);
             font-size: 1.8rem;
-            color: var(--primary-red);
             margin-bottom: 1rem;
         }
 
-        .pillar-card ul {
-            list-style: none;
-            padding-left: 0;
+        .pillar-card p {
+            color: var(--text-light);
+            line-height: 1.8;
         }
 
-        .pillar-card li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .pillar-card li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--accent-green);
-            font-weight: bold;
-        }
-
-        /* Interactive Diagram */
-        .diagram {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 3rem;
-            border-radius: 20px;
-            margin: 3rem 0;
-            color: white;
-        }
-
-        .diagram-content {
+        /* Lessons from History */
+        .lessons-container {
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .diagram-node {
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            min-width: 200px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .diagram-node:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.05);
-        }
-
-        .diagram-node .icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Lessons Section */
-        .lessons {
-            background: var(--light-bg);
-            padding: 3rem;
-            border-radius: 20px;
-            margin: 3rem 0;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
 
         .lesson-item {
-            background: white;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, rgba(204, 0, 0, 0.05), transparent);
+            padding: 1.5rem;
+            border-left: 5px solid var(--communist-red);
             border-radius: 10px;
-            border-left: 5px solid var(--primary-red);
             transition: all 0.3s;
         }
 
         .lesson-item:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transform: translateX(10px);
+            background: linear-gradient(to right, rgba(204, 0, 0, 0.1), transparent);
+            box-shadow: -5px 0 20px rgba(204, 0, 0, 0.2);
         }
 
-        .lesson-number {
-            display: inline-block;
-            background: var(--primary-red);
-            color: white;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            border-radius: 50%;
-            text-align: center;
-            font-weight: bold;
-            margin-right: 1rem;
-        }
-
-        /* Chatbot */
-        .chatbot-container {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 1000;
-        }
-
-        .chatbot-toggle {
-            background: var(--primary-red);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all 0.3s;
-        }
-
-        .chatbot-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-        }
-
-        .chatbot-window {
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            width: 400px;
-            height: 600px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .chatbot-window.active {
-            display: flex;
-        }
-
-        .chatbot-header {
-            background: linear-gradient(135deg, var(--primary-red) 0%, #c0392b 100%);
-            color: white;
-            padding: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chatbot-header h3 {
-            margin: 0;
-        }
-
-        .chatbot-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .chatbot-messages {
-            flex: 1;
-            padding: 1.5rem;
-            overflow-y: auto;
-            background: #f8f9fa;
-        }
-
-        .message {
-            margin-bottom: 1rem;
-            padding: 1rem;
-            border-radius: 10px;
-            max-width: 80%;
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .message.bot {
-            background: white;
-            border: 1px solid #e0e0e0;
-            margin-right: auto;
-        }
-
-        .message.user {
-            background: var(--primary-red);
-            color: white;
-            margin-left: auto;
-        }
-
-        .chatbot-input {
-            display: flex;
-            padding: 1rem;
-            background: white;
-            border-top: 1px solid #e0e0e0;
-        }
-
-        .chatbot-input input {
-            flex: 1;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 25px;
-            outline: none;
-            font-size: 1rem;
-        }
-
-        .chatbot-input button {
-            background: var(--primary-red);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            margin-left: 0.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .chatbot-input button:hover {
-            background: #c0392b;
-        }
-
-        .typing-indicator {
-            display: none;
-            padding: 1rem;
-            background: white;
-            border-radius: 10px;
-            width: fit-content;
-            margin-bottom: 1rem;
-        }
-
-        .typing-indicator.active {
-            display: block;
-        }
-
-        .typing-indicator span {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #999;
-            border-radius: 50%;
-            margin: 0 2px;
-            animation: typing 1.4s infinite;
-        }
-
-        .typing-indicator span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-indicator span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-10px); }
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark-bg);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .nav-links {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .chatbot-window {
-                width: 90vw;
-                right: 5vw;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-        }
-
-        /* Quick Stats */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 2rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 15px;
-            transition: all 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: bold;
+        .lesson-item h4 {
+            color: var(--communist-red);
+            font-size: 1.4rem;
             margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .stat-label {
-            font-size: 1.1rem;
+        .lesson-item p {
+            color: var(--text-dark);
+            line-height: 1.8;
         }
 
-        /* AI Content Generator Section */
-        .ai-section {
-            background: linear-gradient(135deg, #2d3436 0%, #1a1a2e 100%);
-            padding: 4rem 2rem;
-            margin: 4rem 0;
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ai-section::before {
-            content: '🤖';
-            position: absolute;
-            font-size: 30rem;
-            opacity: 0.05;
-            top: 50%;
-            right: -5%;
-            transform: translateY(-50%);
-        }
-
-        .ai-section-title {
-            color: var(--gold);
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            font-weight: 900;
-        }
-
-        .ai-section-subtitle {
-            color: white;
-            text-align: center;
-            font-size: 1.3rem;
-            margin-bottom: 3rem;
-            opacity: 0.9;
-        }
-
-        .ai-tools {
+        /* AI Tools Section */
+        .ai-tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
 
         .ai-tool-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: white;
             padding: 2rem;
             border-radius: 15px;
-            border: 3px solid var(--gold);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
             transition: all 0.3s;
+            border: 2px solid transparent;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ai-tool-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .ai-tool-card:hover::before {
-            left: 100%;
         }
 
         .ai-tool-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
-            border-color: var(--communist-red);
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(0, 136, 227, 0.25);
+            border-color: var(--accent-blue);
         }
 
-        .ai-tool-icon {
-            font-size: 4rem;
+        .ai-tool-card .tool-icon {
+            font-size: 3.5rem;
             margin-bottom: 1rem;
-            text-align: center;
+            display: inline-block;
+            animation: rotate 4s linear infinite;
         }
 
-        .ai-tool-title {
-            color: var(--communist-red);
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .ai-tool-card h3 {
+            color: var(--accent-blue);
             font-size: 1.5rem;
-            font-weight: bold;
             margin-bottom: 1rem;
-            text-align: center;
         }
 
-        .ai-tool-desc {
+        .ai-tool-card p {
             color: var(--text-light);
-            text-align: center;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        .ai-button {
-            background: linear-gradient(135deg, var(--communist-red) 0%, #a00000 100%);
+        .ai-tool-card button {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
             color: white;
             border: none;
             padding: 0.8rem 2rem;
             border-radius: 25px;
-            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
             font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(9, 132, 227, 0.3);
         }
 
-        .ai-button:hover {
-            background: linear-gradient(135deg, #a00000 0%, var(--communist-red) 100%);
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(204, 0, 0, 0.4);
+        .ai-tool-card button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(9, 132, 227, 0.5);
         }
 
         /* AI Modal */
@@ -874,30 +500,51 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
+            z-index: 10000;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
         }
 
         .ai-modal.active {
             display: flex;
+            animation: fadeIn 0.3s ease-out;
         }
 
-        .ai-modal-content {
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
             background: white;
-            padding: 3rem;
+            padding: 2.5rem;
             border-radius: 20px;
-            max-width: 800px;
+            max-width: 700px;
             width: 90%;
-            max-height: 90vh;
+            max-height: 85vh;
             overflow-y: auto;
-            position: relative;
-            border: 5px solid var(--gold);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: slideInModal 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
         }
 
-        .ai-modal-close {
+        @keyframes slideInModal {
+            from {
+                transform: translateY(-100px) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .close-btn {
             position: absolute;
             top: 1rem;
             right: 1rem;
@@ -907,279 +554,227 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            font-size: 1.5rem;
             cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(204, 0, 0, 0.3);
         }
 
-        .ai-modal-close:hover {
-            transform: rotate(90deg);
-            background: #a00000;
+        .close-btn:hover {
+            background: #990000;
+            transform: rotate(90deg) scale(1.1);
         }
 
-        .ai-input-group {
+        .modal-content h2 {
+            color: var(--communist-red);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 1rem;
             margin-bottom: 1.5rem;
         }
 
-        .ai-input-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--communist-red);
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .ai-input-group input,
-        .ai-input-group textarea,
-        .ai-input-group select {
-            width: 100%;
+        .chat-input-container input {
+            flex: 1;
             padding: 1rem;
-            border: 2px solid #ddd;
+            border: 2px solid #e0e0e0;
             border-radius: 10px;
             font-size: 1rem;
             transition: all 0.3s;
         }
 
-        .ai-input-group input:focus,
-        .ai-input-group textarea:focus,
-        .ai-input-group select:focus {
+        .chat-input-container input:focus {
             outline: none;
-            border-color: var(--communist-red);
-            box-shadow: 0 0 10px rgba(204, 0, 0, 0.2);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 15px rgba(9, 132, 227, 0.2);
         }
 
-        .ai-input-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .ai-output {
-            background: #f8f9fa;
-            padding: 2rem;
+        .chat-input-container button {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
             border-radius: 10px;
-            border-left: 5px solid var(--communist-red);
-            margin-top: 2rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(9, 132, 227, 0.3);
+        }
+
+        .chat-input-container button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(9, 132, 227, 0.5);
+        }
+
+        .chat-input-container button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
             display: none;
-        }
-
-        .ai-output.active {
-            display: block;
-            animation: slideIn 0.5s ease-out;
-        }
-
-        .ai-loading {
             text-align: center;
-            padding: 2rem;
-            display: none;
+            padding: 1rem;
+            color: var(--accent-blue);
         }
 
-        .ai-loading.active {
+        .loading.active {
             display: block;
         }
 
-        .ai-loading-spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--communist-red);
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(9, 132, 227, 0.2);
+            border-top-color: var(--accent-blue);
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            to { transform: rotate(360deg); }
         }
 
-        /* Advanced Animations */
+        .output {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-blue);
+        }
+
+        .output.active {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
         @keyframes fadeInUp {
             from {
+                transform: translateY(20px);
                 opacity: 0;
-                transform: translateY(30px);
             }
             to {
-                opacity: 1;
                 transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
                 opacity: 1;
-                transform: translateX(0);
             }
         }
 
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .output h3 {
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
         }
 
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        .output-content {
+            color: var(--text-dark);
+            line-height: 1.8;
         }
 
-        /* Parallax Scrolling Effect */
-        .parallax-section {
+        .output-content h1,
+        .output-content h2,
+        .output-content h3 {
+            color: var(--communist-red);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .output-content ul,
+        .output-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .output-content code {
+            background: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .output-content pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .output-content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #2d3436 0%, #1a1a2e 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
             position: relative;
             overflow: hidden;
         }
 
-        .parallax-bg {
+        footer::before {
+            content: '☭';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            transform: translateZ(-1px) scale(2);
+            font-size: 15rem;
+            opacity: 0.03;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
-        /* Image Gallery Styles */
-        .image-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
             gap: 2rem;
-            margin: 3rem 0;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
-        .gallery-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(204, 0, 0, 0.3);
-            transition: all 0.4s ease;
-            cursor: pointer;
+        .footer-links a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
         }
 
-        .gallery-item:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(204, 0, 0, 0.5);
+        .footer-links a:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: translateY(-2px);
         }
 
-        .gallery-item img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            transition: transform 0.4s ease;
+        .footer-quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin: 2rem 0;
+            color: var(--gold);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(204, 0, 0, 0.9), transparent);
-            padding: 2rem;
-            transform: translateY(100%);
-            transition: transform 0.4s ease;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-        }
-
-        .gallery-title {
-            color: white;
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .gallery-desc {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.9rem;
-        }
-
-        /* Floating Icons Animation */
-        .floating-icon {
-            position: fixed;
-            font-size: 3rem;
-            opacity: 0.1;
-            pointer-events: none;
-            z-index: -1;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            25% {
-                transform: translateY(-30px) rotate(5deg);
-            }
-            50% {
-                transform: translateY(0) rotate(0deg);
-            }
-            75% {
-                transform: translateY(-30px) rotate(-5deg);
-            }
-        }
-
-        /* Counter Animation */
-        .stat-counter {
-            font-size: 3rem;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Glowing Border Effect */
-        .glow-border {
-            position: relative;
-            border: 2px solid transparent;
-            background: linear-gradient(white, white) padding-box,
-                        linear-gradient(135deg, var(--communist-red), var(--gold), var(--communist-red)) border-box;
-            animation: borderGlow 3s linear infinite;
-        }
-
-        @keyframes borderGlow {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            }
-            50% {
-                box-shadow: 0 0 40px rgba(255, 215, 0, 0.8), 0 0 60px rgba(204, 0, 0, 0.5);
-            }
-        }
-
-        /* Text Reveal Animation */
-        .text-reveal {
-            overflow: hidden;
-        }
-
-        .text-reveal span {
-            display: inline-block;
-            opacity: 0;
-            animation: revealText 0.5s forwards;
-        }
-
-        @keyframes revealText {
-            to {
-                opacity: 1;
-            }
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+            color: #95a5a6;
         }
 
         /* Scroll Progress Bar */
@@ -1189,274 +784,101 @@
             left: 0;
             height: 4px;
             background: linear-gradient(90deg, var(--communist-red), var(--gold));
-            z-index: 9999;
-            transition: width 0.1s;
+            z-index: 10001;
+            transition: width 0.2s;
+            box-shadow: 0 2px 10px rgba(204, 0, 0, 0.5);
         }
 
-        /* Info Cards with Flip Effect */
-        .flip-card {
-            perspective: 1000px;
-            height: 400px;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .pillars-grid,
+            .ai-tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+                width: 95%;
+            }
+
+            .chat-input-container {
+                flex-direction: column;
+            }
         }
 
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
+        /* Additional Effects */
+        .card-3d {
+            transition: transform 0.3s ease-out;
         }
 
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .flip-card-front,
-        .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-        }
-
-        .flip-card-front {
-            background: linear-gradient(135deg, var(--communist-red), #a00000);
-            color: white;
-        }
-
-        .flip-card-back {
-            background: linear-gradient(135deg, var(--gold), #ffa500);
-            color: var(--communist-red);
-            transform: rotateY(180deg);
-        }
-
-        /* Typewriter Effect */
-        .typewriter {
-            overflow: hidden;
-            border-right: 3px solid var(--gold);
-            white-space: nowrap;
-            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: var(--gold); }
-        }
-
-        /* Ripple Effect */
         .ripple {
             position: relative;
             overflow: hidden;
         }
 
-        .ripple::after {
-            content: '';
+        .ripple-effect {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
             border-radius: 50%;
-            background: rgba(255, 215, 0, 0.5);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: rippleAnimation 0.6s ease-out;
         }
 
-        .ripple:hover::after {
-            width: 300px;
-            height: 300px;
+        @keyframes rippleAnimation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
         }
 
-        /* 3D Card Effect */
-        .card-3d {
-            transition: transform 0.3s ease;
-            transform-style: preserve-3d;
+        .text-reveal span {
+            display: inline-block;
+            opacity: 0;
+            animation: fadeInChar 0.5s forwards;
         }
 
-        .card-3d:hover {
-            transform: rotateY(5deg) rotateX(5deg);
+        @keyframes fadeInChar {
+            to {
+                opacity: 1;
+            }
         }
 
-        /* Markdown Styling */
-        .markdown-content {
-            line-height: 1.8;
-        }
-
-        .markdown-content h1 {
-            font-size: 2rem;
-            color: var(--communist-red);
-            margin: 1.5rem 0 1rem;
-            border-bottom: 3px solid var(--gold);
-            padding-bottom: 0.5rem;
-        }
-
-        .markdown-content h2 {
-            font-size: 1.7rem;
-            color: var(--communist-red);
-            margin: 1.3rem 0 0.8rem;
-            border-left: 5px solid var(--gold);
-            padding-left: 1rem;
-        }
-
-        .markdown-content h3 {
-            font-size: 1.4rem;
-            color: var(--text-dark);
-            margin: 1rem 0 0.6rem;
-            font-weight: bold;
-        }
-
-        .markdown-content h4 {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            margin: 0.8rem 0 0.5rem;
-            font-weight: bold;
-        }
-
-        .markdown-content p {
-            margin: 0.8rem 0;
-            color: var(--text-dark);
-            text-align: justify;
-        }
-
-        .markdown-content ul,
-        .markdown-content ol {
-            margin: 1rem 0;
-            padding-left: 2rem;
-        }
-
-        .markdown-content li {
-            margin: 0.5rem 0;
-            color: var(--text-dark);
-        }
-
-        .markdown-content ul li::marker {
-            color: var(--communist-red);
-            font-weight: bold;
-        }
-
-        .markdown-content ol li::marker {
-            color: var(--communist-red);
-            font-weight: bold;
-        }
-
-        .markdown-content blockquote {
-            border-left: 4px solid var(--gold);
-            background: rgba(255, 215, 0, 0.1);
-            padding: 1rem;
-            margin: 1rem 0;
-            font-style: italic;
-            color: var(--text-dark);
-        }
-
-        .markdown-content code {
-            background: #f4f4f4;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: var(--communist-red);
-            font-size: 0.9em;
-        }
-
-        .markdown-content pre {
-            background: #2d2d2d;
-            color: #f8f8f2;
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 1rem 0;
-        }
-
-        .markdown-content pre code {
-            background: transparent;
-            color: inherit;
-            padding: 0;
-        }
-
-        .markdown-content a {
-            color: var(--accent-blue);
-            text-decoration: underline;
-            transition: color 0.3s;
-        }
-
-        .markdown-content a:hover {
-            color: var(--communist-red);
-        }
-
-        .markdown-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-        }
-
-        .markdown-content table th {
-            background: var(--communist-red);
-            color: white;
-            padding: 0.8rem;
-            text-align: left;
-            font-weight: bold;
-        }
-
-        .markdown-content table td {
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-        }
-
-        .markdown-content table tr:nth-child(even) {
-            background: #f8f9fa;
-        }
-
-        .markdown-content hr {
-            border: none;
-            border-top: 2px solid var(--gold);
-            margin: 2rem 0;
-        }
-
-        .markdown-content strong {
-            color: var(--communist-red);
-            font-weight: bold;
-        }
-
-        .markdown-content em {
-            color: var(--text-light);
-            font-style: italic;
-        }
-
-        .markdown-content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 1rem 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        .parallax-bg {
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
     </style>
 </head>
 <body>
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Communist Symbol Background -->
+    <div class="communist-symbol">☭</div>
+    
+    <!-- Red Flag Background -->
+    <div class="red-flag-bg"></div>
+
     <!-- Scroll Progress Bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- Background Effects -->
-    <div class="particles" id="particles"></div>
-    <div class="communist-symbol">☭</div>
-    <div class="red-flag-bg"></div>
-
-    <!-- Floating Icons -->
-    <div class="floating-icon" style="top: 10%; left: 5%; animation-delay: 0s;">⚙️</div>
-    <div class="floating-icon" style="top: 20%; right: 10%; animation-delay: 2s;">🌾</div>
-    <div class="floating-icon" style="top: 40%; left: 15%; animation-delay: 4s;">🎓</div>
-    <div class="floating-icon" style="top: 60%; right: 5%; animation-delay: 6s;">💼</div>
-    <div class="floating-icon" style="top: 80%; left: 10%; animation-delay: 8s;">⭐</div>
-
+    <!-- Header -->
     <header>
         <nav>
             <div class="logo">
@@ -1464,624 +886,311 @@
                 <span>Liên minh Công - Nông - Trí</span>
             </div>
             <ul class="nav-links">
-                <li><a href="#gioi-thieu">Giới thiệu</a></li>
-                <li><a href="#vai-tro">Vai trò</a></li>
-                <li><a href="#thuc-tien">Thực tiễn</a></li>
-                <li><a href="#ai-tools">AI Công cụ</a></li>
-                <li><a href="#bai-hoc">Bài học</a></li>
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#principles">Ba Trụ Cột</a></li>
+                <li><a href="#lessons">Bài Học</a></li>
+                <li><a href="#ai-tools">Công Cụ AI</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="hero">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Liên minh Công - Nông - Trí</h1>
-            <p>Trong công cuộc Công nghiệp hóa - Hiện đại hóa Việt Nam</p>
-            
-            <div style="margin-top: 2rem;">
-                <button class="cta-button ripple" onclick="document.getElementById('gioi-thieu').scrollIntoView({behavior: 'smooth'})">
-                    Khám phá ngay
-                </button>
+            <h1>⚙️🌾🎓 Liên minh Công - Nông - Trí</h1>
+            <p>Xây dựng xã hội chủ nghĩa khoa học bằng sức mạnh của công nhân, nông dân và trí thức</p>
+            <p style="font-size: 1.2rem; margin-top: 1rem;">
+                ☭ Đoàn kết - Sáng tạo - Phát triển ☭
+            </p>
+        </div>
+    </section>
+
+    <!-- Three Pillars Section -->
+    <section class="section" id="principles">
+        <h2>⭐ Ba Trụ Cột của Chủ Nghĩa Xã Hội Khoa Học ⭐</h2>
+        <div class="pillars-grid">
+            <div class="pillar-card card-3d">
+                <div class="pillar-icon">⚙️</div>
+                <h3>Giai cấp Công nhân</h3>
+                <p>Lực lượng lao động sản xuất công nghiệp, là nền tảng vật chất của xã hội. Công nhân tạo ra của cải, vận hành máy móc, và xây dựng cơ sở hạ tầng cho đất nước. Họ đại diện cho sức mạnh lao động có tổ chức và kỷ luật.</p>
+            </div>
+            <div class="pillar-card card-3d">
+                <div class="pillar-icon">🌾</div>
+                <h3>Giai cấp Nông dân</h3>
+                <p>Người cung cấp lương thực và nguyên liệu thô. Nông dân canh tác ruộng đồng, chăn nuôi gia súc, và đảm bảo an ninh lương thực quốc gia. Họ là xương sống của nền kinh tế nông nghiệp và bảo vệ văn hóa truyền thống.</p>
+            </div>
+            <div class="pillar-card card-3d">
+                <div class="pillar-icon">🎓</div>
+                <h3>Giai cấp Trí thức</h3>
+                <p>Đội ngũ tri thức, nghiên cứu, sáng tạo và đổi mới. Trí thức phát triển khoa học, công nghệ, giáo dục, y tế và văn hóa. Họ dẫn dắt xã hội tiến bộ thông qua nghiên cứu, phát minh và truyền bá kiến thức.</p>
             </div>
         </div>
     </section>
 
-    <div class="container">
-        <!-- Giới thiệu -->
-        <section id="gioi-thieu" class="section">
-            <h2 class="section-title">Sự cần thiết khách quan</h2>
-            <p style="font-size: 1.2rem; line-height: 1.8; color: var(--text-light);">
-                Trong thời kỳ quá độ lên chủ nghĩa xã hội, giai cấp công nhân, giai cấp nông dân và tầng lớp lao động khác vừa là lực lượng sản xuất cơ bản, vừa là lực lượng chính trị - xã hội to lớn. Nếu thực hiện tốt khối liên minh giữa giai cấp công nhân với giai cấp nông dân và các tầng lớp nhân dân lao động khác, trong đó trước hết là với trí thức thì không những xây dựng được cơ sở kinh tế vững mạnh mà chế độ chính trị xã hội chủ nghĩa cũng ngày càng được củng cố vững chắc.
-            </p>
-            
-            <div style="background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%); padding: 2rem; border-radius: 15px; margin: 2rem 0; border-left: 5px solid var(--primary-red);">
-                <p style="font-size: 1.3rem; font-style: italic; color: var(--text-dark); margin: 0;">
-                    <strong>V.I. Lênin:</strong> "Trước sự liên minh của các đại biểu khoa học, giai cấp vô sản và giới kỹ thuật, không một thế lực đen tối nào đứng vững được"
-                </p>
+    <!-- Lessons from History -->
+    <section class="section" id="lessons">
+        <h2>📚 Bài Học Từ Lịch Sử</h2>
+        <div class="lessons-container">
+            <div class="lesson-item">
+                <h4>🔴 Sự Đoàn Kết Tạo Nên Sức Mạnh</h4>
+                <p>Khi ba giai cấp đoàn kết, không có thế lực nào có thể chia rẽ. Lịch sử đã chứng minh rằng sự hợp tác giữa công nhân, nông dân và trí thức là chìa khóa cho mọi cuộc cách mạng thành công.</p>
             </div>
-        </section>
-
-        <!-- Image Gallery Section -->
-        <section class="section">
-            <h2 class="section-title">Hình ảnh minh họa</h2>
-            <div class="image-gallery">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="Công nhân công nghiệp">
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">⚙️ Giai cấp Công nhân</div>
-                        <div class="gallery-desc">Lực lượng tiên phong trong công nghiệp hóa, hiện đại hóa</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&q=80" alt="Nông dân canh tác">
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">🌾 Giai cấp Nông dân</div>
-                        <div class="gallery-desc">Chủ thể xây dựng nông thôn mới, đảm bảo an ninh lương thực</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80" alt="Trí thức nghiên cứu">
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">🎓 Đội ngũ Trí thức</div>
-                        <div class="gallery-desc">Lực lượng sáng tạo, đưa khoa học công nghệ vào sản xuất</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80" alt="Doanh nhân">
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">💼 Đội ngũ Doanh nhân</div>
-                        <div class="gallery-desc">Động lực phát triển kinh tế, tạo việc làm cho xã hội</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1560264280-88b68371db39?w=800&q=80" alt="Công nghiệp 4.0">
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">🤖 Cách mạng 4.0</div>
-                        <div class="gallery-desc">Ứng dụng công nghệ cao trong sản xuất hiện đại</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80" alt="Nông nghiệp công nghệ cao">
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">🌱 Nông nghiệp 4.0</div>
-                        <div class="gallery-desc">Ứng dụng công nghệ cao trong nông nghiệp Việt Nam</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Đoàn kết">
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">🤝 Đại đoàn kết</div>
-                        <div class="gallery-desc">Sức mạnh đoàn kết toàn dân tộc</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80" alt="Tương lai">
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">🚀 Tương lai</div>
-                        <div class="gallery-desc">Hướng tới tương lai phát triển bền vững</div>
-                    </div>
-                </div>
+            <div class="lesson-item">
+                <h4>⭐ Giáo Dục Là Nền Tảng</h4>
+                <p>Một xã hội phát triển cần đầu tư vào giáo dục toàn diện. Công nhân cần được đào tạo kỹ năng, nông dân cần kiến thức khoa học kỹ thuật, và trí thức cần môi trường nghiên cứu.</p>
             </div>
-        </section>
-
-        <!-- Ba trụ cột -->
-        <section id="vai-tro" class="section">
-            <h2 class="section-title">Ba trụ cột của Liên minh</h2>
-            
-            <div class="pillars">
-                <div class="pillar-card">
-                    <div class="pillar-icon">⚙️</div>
-                    <h3>Giai cấp Công nhân</h3>
-                    <p style="margin-bottom: 1rem; color: var(--text-light);">
-                        Lực lượng lãnh đạo cách mạng, đại diện cho phương thức sản xuất tiên tiến
-                    </p>
-                    <ul>
-                        <li>Giai cấp lãnh đạo thông qua Đảng Cộng sản Việt Nam</li>
-                        <li>Lực lượng đi đầu trong CNH-HĐH</li>
-                        <li>Công nhân hiện đại, công nhân tri thức ngày càng phát triển</li>
-                        <li>Nòng cốt trong liên minh giai cấp</li>
-                    </ul>
-                </div>
-
-                <div class="pillar-card">
-                    <div class="pillar-icon">🌾</div>
-                    <h3>Giai cấp Nông dân</h3>
-                    <p style="margin-bottom: 1rem; color: var(--text-light);">
-                        Vị trí chiến lược trong công nghiệp hóa, hiện đại hóa nông nghiệp, nông thôn
-                    </p>
-                    <ul>
-                        <li>Đảm bảo an ninh lương thực quốc gia</li>
-                        <li>Chủ thể xây dựng nông thôn mới</li>
-                        <li>Cung cấp nguồn nguyên liệu cho công nghiệp</li>
-                        <li>Giữ gìn bản sắc văn hóa dân tộc</li>
-                    </ul>
-                </div>
-
-                <div class="pillar-card">
-                    <div class="pillar-icon">🎓</div>
-                    <h3>Đội ngũ Trí thức</h3>
-                    <p style="margin-bottom: 1rem; color: var(--text-light);">
-                        Lực lượng lao động sáng tạo, chất xúc tác của liên minh
-                    </p>
-                    <ul>
-                        <li>Đẩy mạnh CNH-HĐH và hội nhập quốc tế</li>
-                        <li>Xây dựng kinh tế tri thức</li>
-                        <li>Nâng tầm trí tuệ dân tộc</li>
-                        <li>Vai trò quyết định trong Cách mạng 4.0</li>
-                    </ul>
-                </div>
+            <div class="lesson-item">
+                <h4>🚩 Công Bằng Xã Hội Là Mục Tiêu</h4>
+                <p>Mọi người đều xứng đáng có quyền lợi ngang nhau. Phân phối công bằng của cải, cơ hội và quyền lực là nguyên tắc cốt lõi để xây dựng một xã hội hài hòa và bền vững.</p>
             </div>
-
-            <!-- Doanh nhân -->
-            <div style="background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%); padding: 2rem; border-radius: 15px; color: white; margin-top: 2rem;">
-                <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">💼 Đội ngũ Doanh nhân</h3>
-                <p style="font-size: 1.1rem; line-height: 1.8;">
-                    Tầng lớp xã hội đặc biệt với vai trò ngày càng quan trọng trong phát triển kinh tế - xã hội. Đại hội XIII của Đảng nhấn mạnh phát triển đội ngũ doanh nhân lớn mạnh, có tinh thần cống hiến cho dân tộc, chuẩn mực văn hóa, đạo đức tiến bộ và trình độ quản trị kinh doanh giỏi.
-                </p>
+            <div class="lesson-item">
+                <h4>💡 Đổi Mới Không Ngừng</h4>
+                <p>Xã hội chủ nghĩa phải liên tục học hỏi và cải tiến. Áp dụng công nghệ mới, phương pháp sản xuất hiện đại, và tư duy sáng tạo để đáp ứng nhu cầu của thời đại.</p>
             </div>
-        </section>
-
-        <!-- Sơ đồ tương tác -->
-        <section id="thuc-tien" class="section">
-            <h2 class="section-title">Sự gắn kết trong thực tiễn CNH-HĐH</h2>
-            
-            <div class="diagram">
-                <h3 style="text-align: center; font-size: 2rem; margin-bottom: 2rem;">
-                    Chuỗi giá trị kinh tế - xã hội hỗ trợ lẫn nhau
-                </h3>
-                <div class="diagram-content">
-                    <div class="diagram-node" onclick="showInteraction('cong-nghiep')">
-                        <div class="icon">⚙️</div>
-                        <h4>Công nghiệp</h4>
-                        <p>Cung cấp tư liệu sản xuất hiện đại cho nông nghiệp</p>
-                    </div>
-
-                    <div class="diagram-node" onclick="showInteraction('nong-nghiep')">
-                        <div class="icon">🌾</div>
-                        <h4>Nông nghiệp</h4>
-                        <p>Đảm bảo an ninh lương thực, cung cấp nguyên liệu</p>
-                    </div>
-
-                    <div class="diagram-node" onclick="showInteraction('tri-thuc')">
-                        <div class="icon">🎓</div>
-                        <h4>Trí thức</h4>
-                        <p>Chất xúc tác - đưa khoa học vào sản xuất</p>
-                    </div>
-                </div>
-
-                <div id="interaction-detail" style="background: rgba(255,255,255,0.2); padding: 2rem; border-radius: 15px; margin-top: 2rem; display: none;">
-                    <h4 id="interaction-title" style="font-size: 1.5rem; margin-bottom: 1rem;"></h4>
-                    <p id="interaction-content" style="font-size: 1.1rem; line-height: 1.8;"></p>
-                </div>
+            <div class="lesson-item">
+                <h4>🌍 Quốc Tế Chủ Nghĩa</h4>
+                <p>Giai cấp lao động toàn thế giới là một. Đoàn kết quốc tế giữa các dân tộc, hỗ trợ lẫn nhau trong cuộc đấu tranh chống áp bức và bất công là tinh thần bất diệt.</p>
             </div>
+        </div>
+    </section>
 
-            <!-- Ví dụ thực tiễn -->
-            <div style="background: white; padding: 2rem; border-radius: 15px; margin-top: 2rem; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
-                <h3 style="color: var(--primary-red); font-size: 1.8rem; margin-bottom: 1rem;">
-                    📊 Ví dụ thực tiễn: Cánh đồng mẫu lớn & Nông nghiệp thông minh 4.0
-                </h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-                    <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 10px; border-left: 4px solid var(--accent-blue);">
-                        <strong style="color: var(--accent-blue);">Doanh nghiệp</strong>
-                        <p>Đặt hàng và cung cấp tư duy công nghiệp/quản trị</p>
-                    </div>
-                    <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 10px; border-left: 4px solid var(--accent-green);">
-                        <strong style="color: var(--accent-green);">Nhà khoa học</strong>
-                        <p>Cung cấp quy trình canh tác, giống và công nghệ Drone</p>
-                    </div>
-                    <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 10px; border-left: 4px solid var(--primary-yellow);">
-                        <strong style="color: #d4a100;">Nông dân</strong>
-                        <p>Trực tiếp canh tác trên quy mô lớn</p>
-                    </div>
-                </div>
-                <p style="margin-top: 1.5rem; font-size: 1.1rem; color: var(--text-light); text-align: center; font-weight: bold;">
-                    → Kết quả: Năng suất tăng, chi phí giảm, lợi ích chia đều cho cả ba nhà
-                </p>
+    <!-- AI Tools Section -->
+    <section class="section" id="ai-tools">
+        <h2>🤖 Công Cụ AI Hỗ Trợ Cách Mạng</h2>
+        <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">
+            Sử dụng trí tuệ nhân tạo để nâng cao năng suất lao động và phục vụ nhân dân
+        </p>
+        <div class="ai-tools-grid">
+            <div class="ai-tool-card">
+                <div class="tool-icon">🧠</div>
+                <h3>AI Tư Vấn Chính Sách</h3>
+                <p>Phân tích và đề xuất chính sách kinh tế - xã hội dựa trên dữ liệu và nguyên tắc CNXHKH</p>
+                <button class="ripple" onclick="openAIModal('policy')">Khám Phá</button>
             </div>
-        </section>
-
-        <!-- AI Tools Section -->
-        <section id="ai-tools" class="ai-section">
-            <h2 class="ai-section-title">🤖 CÔNG CỤ AI HỖ TRỢ HỌC TẬP</h2>
-            <p class="ai-section-subtitle">Ứng dụng trí tuệ nhân tạo để nâng cao chất lượng học tập môn Chủ nghĩa Xã hội Khoa học</p>
-
-            <div class="ai-tools">
-                <div class="ai-tool-card" onclick="openAITool('summary')">
-                    <div class="ai-tool-icon">📝</div>
-                    <h3 class="ai-tool-title">Tóm tắt nội dung</h3>
-                    <p class="ai-tool-desc">AI sẽ giúp bạn tóm tắt các khái niệm, lý thuyết phức tạp thành những ý chính dễ nhớ</p>
-                    <button class="ai-button">Sử dụng ngay</button>
-                </div>
-
-                <div class="ai-tool-card" onclick="openAITool('explain')">
-                    <div class="ai-tool-icon">💡</div>
-                    <h3 class="ai-tool-title">Giải thích khái niệm</h3>
-                    <p class="ai-tool-desc">Giải thích chi tiết các khái niệm CNXHKH với ví dụ thực tế dễ hiểu</p>
-                    <button class="ai-button">Sử dụng ngay</button>
-                </div>
-
-                <div class="ai-tool-card" onclick="openAITool('quiz')">
-                    <div class="ai-tool-icon">📋</div>
-                    <h3 class="ai-tool-title">Tạo câu hỏi ôn tập</h3>
-                    <p class="ai-tool-desc">Tự động sinh câu hỏi trắc nghiệm và tự luận để ôn tập kiến thức</p>
-                    <button class="ai-button">Sử dụng ngay</button>
-                </div>
-
-                <div class="ai-tool-card" onclick="openAITool('essay')">
-                    <div class="ai-tool-icon">✍️</div>
-                    <h3 class="ai-tool-title">Soạn bài tiểu luận</h3>
-                    <p class="ai-tool-desc">Hỗ trợ lên ý tưởng và dàn ý cho bài tiểu luận về các chủ đề CNXHKH</p>
-                    <button class="ai-button">Sử dụng ngay</button>
-                </div>
-
-                <div class="ai-tool-card" onclick="openAITool('connect')">
-                    <div class="ai-tool-icon">🔗</div>
-                    <h3 class="ai-tool-title">Liên hệ thực tiễn</h3>
-                    <p class="ai-tool-desc">Phân tích và liên hệ lý thuyết với thực tiễn Việt Nam hiện nay</p>
-                    <button class="ai-button">Sử dụng ngay</button>
-                </div>
-
-                <div class="ai-tool-card" onclick="openAITool('compare')">
-                    <div class="ai-tool-icon">⚖️</div>
-                    <h3 class="ai-tool-title">So sánh quan điểm</h3>
-                    <p class="ai-tool-desc">So sánh các quan điểm, học thuyết khác nhau trong CNXHKH</p>
-                    <button class="ai-button">Sử dụng ngay</button>
-                </div>
+            <div class="ai-tool-card">
+                <div class="tool-icon">📊</div>
+                <h3>AI Phân Tích Kinh Tế</h3>
+                <p>Đánh giá tình hình sản xuất, phân phối và tiêu dùng trong nền kinh tế kế hoạch hóa</p>
+                <button class="ripple" onclick="openAIModal('economy')">Khám Phá</button>
             </div>
-        </section>
-
-        <!-- Bài học -->
-        <section id="bai-hoc" class="section">
-            <h2 class="section-title">Bài học về sức mạnh Đại đoàn kết toàn dân tộc</h2>
-            
-            <div class="lessons">
-                <div class="lesson-item">
-                    <span class="lesson-number">1</span>
-                    <strong style="font-size: 1.3rem; color: var(--primary-red);">Lợi ích kinh tế là động lực liên kết</strong>
-                    <p style="margin-top: 0.5rem; color: var(--text-light);">
-                        Khối đại đoàn kết chỉ bền vững khi lợi ích của các giai cấp được giải quyết hài hòa. Nông dân phải giàu lên từ ruộng đồng, công nhân phải có thu nhập ổn định từ nhà máy, và trí thức phải được đãi ngộ xứng đáng với sáng tạo.
-                    </p>
-                </div>
-
-                <div class="lesson-item">
-                    <span class="lesson-number">2</span>
-                    <strong style="font-size: 1.3rem; color: var(--primary-red);">Tăng cường sự lãnh đạo của Đảng</strong>
-                    <p style="margin-top: 0.5rem; color: var(--text-light);">
-                        Đảng giữ vai trò định hướng chính trị để khối liên minh không đi chệch hướng XHCN. Nhà nước kiến tạo hành lang pháp lý (chính sách đất đai, thuế, hỗ trợ khởi nghiệp...) để tạo môi trường phát triển thuận lợi.
-                    </p>
-                </div>
-
-                <div class="lesson-item">
-                    <span class="lesson-number">3</span>
-                    <strong style="font-size: 1.3rem; color: var(--primary-red);">Giáo dục và Đào tạo là chìa khóa</strong>
-                    <p style="margin-top: 0.5rem; color: var(--text-light);">
-                        Để củng cố liên minh trong thời đại 4.0, phải "trí thức hóa" công nhân và nông dân. Việc nâng cao dân trí giúp thu hẹp khoảng cách về trình độ giữa các giai cấp, tạo ra sự bình đẳng và thấu hiểu lẫn nhau.
-                    </p>
-                </div>
-
-                <div class="lesson-item">
-                    <span class="lesson-number">4</span>
-                    <strong style="font-size: 1.3rem; color: var(--primary-red);">Không bỏ ai lại phía sau</strong>
-                    <p style="margin-top: 0.5rem; color: var(--text-light);">
-                        Sức mạnh đại đoàn kết nằm ở việc chăm lo cho các đối tượng yếu thế. Trong quá trình CNH-HĐH, cần đặc biệt quan tâm đến nông dân mất đất sản xuất hoặc công nhân tại các khu công nghiệp, đảm bảo an sinh xã hội để giữ vững ổn định chính trị.
-                    </p>
-                </div>
+            <div class="ai-tool-card">
+                <div class="tool-icon">📚</div>
+                <h3>AI Giáo Dục Quần Chúng</h3>
+                <p>Tạo tài liệu học tập, giải đáp thắc mắc về lý thuyết chủ nghĩa Mác - Lênin</p>
+                <button class="ripple" onclick="openAIModal('education')">Khám Phá</button>
             </div>
-        </section>
-    </div>
+            <div class="ai-tool-card">
+                <div class="tool-icon">🌾</div>
+                <h3>AI Hỗ Trợ Nông Nghiệp</h3>
+                <p>Tư vấn kỹ thuật canh tác, dự báo mùa vụ, và tối ưu hóa sản xuất nông nghiệp</p>
+                <button class="ripple" onclick="openAIModal('agriculture')">Khám Phá</button>
+            </div>
+        </div>
+    </section>
 
     <!-- AI Modal -->
     <div class="ai-modal" id="aiModal">
-        <div class="ai-modal-content">
-            <button class="ai-modal-close" onclick="closeAIModal()">×</button>
-            <h2 id="aiModalTitle" style="color: var(--communist-red); margin-bottom: 2rem; font-size: 2rem; text-align: center;"></h2>
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeAIModal()">✕</button>
+            <h2 id="modalTitle">🤖 Công Cụ AI</h2>
             
-            <div id="aiModalBody">
-                <!-- Content will be inserted here dynamically -->
+            <div class="chat-input-container">
+                <input 
+                    type="text" 
+                    id="userInput" 
+                    placeholder="Nhập câu hỏi của bạn..." 
+                    onkeypress="if(event.key === 'Enter') sendMessage()"
+                />
+                <button onclick="sendMessage()" id="sendButton">Gửi</button>
             </div>
-
-            <div class="ai-loading" id="aiLoading">
-                <div class="ai-loading-spinner"></div>
-                <p style="color: var(--communist-red); font-weight: bold;">Đang xử lý với AI...</p>
+            
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <p>Đang xử lý...</p>
             </div>
-
-            <div class="ai-output" id="aiOutput">
-                <h3 style="color: var(--communist-red); margin-bottom: 1rem;">Kết quả:</h3>
-                <div id="aiOutputContent"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Chatbot -->
-    <div class="chatbot-container">
-        <button class="chatbot-toggle" onclick="toggleChatbot()">💬</button>
-        <div class="chatbot-window" id="chatbotWindow">
-            <div class="chatbot-header">
-                <h3>🤖 Trợ lý AI (Groq LLaMA)</h3>
-                <button class="chatbot-close" onclick="toggleChatbot()">×</button>
-            </div>
-            <div class="chatbot-messages" id="chatMessages">
-                <div class="message bot">
-                    Xin chào! Tôi là trợ lý AI về Chủ nghĩa Xã hội Khoa học. Tôi có thể giúp bạn tìm hiểu về:<br><br>
-                    • Liên minh Công - Nông - Trí<br>
-                    • Vai trò của các giai cấp<br>
-                    • Công nghiệp hóa, hiện đại hóa<br>
-                    • Các bài học về đại đoàn kết<br><br>
-                    Bạn muốn hỏi gì?
-                </div>
-            </div>
-            <div class="typing-indicator" id="typingIndicator">
-                <span></span><span></span><span></span>
-            </div>
-            <div class="chatbot-input">
-                <input type="text" id="chatInput" placeholder="Nhập câu hỏi của bạn..." onkeypress="handleKeyPress(event)">
-                <button onclick="sendMessage()">Gửi</button>
+            
+            <div class="output" id="output">
+                <h3>📝 Kết Quả:</h3>
+                <div class="output-content" id="outputContent"></div>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Sản phẩm sáng tạo môn Chủ Nghĩa Xã Hội Khoa Học</p>
-        <p style="margin-top: 0.5rem; opacity: 0.8;">Được tạo với ❤️ bởi Claude AI</p>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home">Trang chủ</a>
+                <a href="#principles">Ba Trụ Cột</a>
+                <a href="#lessons">Bài Học</a>
+                <a href="#ai-tools">Công Cụ AI</a>
+            </div>
+            
+            <div class="footer-quote">
+                "Không có gì quý hơn độc lập, tự do!"<br>
+                - Chủ tịch Hồ Chí Minh
+            </div>
+            
+            <div class="footer-quote">
+                ⚙️🌾🎓<br>
+                "Công nhân và nông dân và trí thức đoàn kết lại,<br>
+                Xây dựng một xã hội công bằng, văn minh và tiến bộ!"
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 Liên minh Công - Nông - Trí | Vì một tương lai tươi sáng ☭</p>
+            </div>
+        </div>
     </footer>
 
     <script>
-        // Chatbot functionality
-        function toggleChatbot() {
-            const chatWindow = document.getElementById('chatbotWindow');
-            chatWindow.classList.toggle('active');
+        // Create particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const star = document.createElement('div');
+            star.className = 'star-particle';
+            star.textContent = '⭐';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 15 + 's';
+            star.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            particlesContainer.appendChild(star);
         }
 
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
-        }
+        // AI Modal functions
+        let currentTool = '';
+        const conversationHistory = [];
 
-        async function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            
-            if (!message) return;
-
-            // Add user message
-            addMessage(message, 'user');
-            input.value = '';
-
-            // Show typing indicator
-            const typingIndicator = document.getElementById('typingIndicator');
-            typingIndicator.classList.add('active');
-
-            // Call Groq API
-            try {
-                const response = await fetch("/api/chat", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        messages: [
-                            {
-                                role: "system",
-                                content: "Bạn là trợ lý AI chuyên về Chủ nghĩa Xã hội Khoa học, đặc biệt là Liên minh Công - Nông - Trí trong công cuộc CNH-HĐH Việt Nam."
-                            },
-                            {
-                                role: "user",
-                                content: message
-                            }
-                        ]
-                    })
-                });
-                
-
-                const data = await response.json();
-                typingIndicator.classList.remove('active');
-
-                if (data.choices && data.choices[0] && data.choices[0].message) {
-                    addMessage(data.choices[0].message.content, 'bot');
-                } else if (data.error) {
-                    addMessage(`❌ Lỗi API: ${data.error.message || 'Vui lòng kiểm tra lại cấu hình'}`, 'bot');
-                } else {
-                    addMessage('Xin lỗi, tôi gặp sự cố khi xử lý câu hỏi. Vui lòng thử lại!', 'bot');
-                }
-            } catch (error) {
-                typingIndicator.classList.remove('active');
-                addMessage('❌ Lỗi kết nối! Vui lòng kiểm tra kết nối internet.', 'bot');
-                console.error('Error:', error);
-            }
-        }
-
-        function addMessage(text, sender) {
-            const messagesContainer = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}`;
-            
-            if (sender === 'bot') {
-                // Parse markdown for bot messages
-                messageDiv.classList.add('markdown-content');
-                messageDiv.innerHTML = marked.parse(text);
-            } else {
-                // Plain text for user messages
-                messageDiv.textContent = text;
-            }
-            
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        // Interaction diagram
-        function showInteraction(type) {
-            const detail = document.getElementById('interaction-detail');
-            const title = document.getElementById('interaction-title');
-            const content = document.getElementById('interaction-content');
-
-            const interactions = {
-                'cong-nghiep': {
-                    title: '⚙️ Công nghiệp hỗ trợ Nông nghiệp',
-                    content: 'Cung cấp tư liệu sản xuất hiện đại: Máy cày, máy gặt đập liên hợp, hệ thống tưới tiêu tự động, phân bón, thuốc bảo vệ thực vật... giúp giải phóng sức lao động thủ công cho nông dân. Công nghiệp chế biến giúp nâng cao giá trị nông sản, giải quyết bài toán "được mùa mất giá".'
-                },
-                'nong-nghiep': {
-                    title: '🌾 Nông nghiệp hỗ trợ Công nghiệp và Trí thức',
-                    content: 'Đảm bảo an ninh lương thực, thực phẩm cho toàn xã hội, tạo nền tảng ổn định để công nhân và trí thức yên tâm sản xuất, sáng tạo. Cung cấp nguồn nguyên liệu đầu vào dồi dào cho công nghiệp chế biến (cao su, cà phê, thủy hải sản...). Là thị trường tiêu thụ rộng lớn các sản phẩm của công nghiệp và dịch vụ khoa học công nghệ.'
-                },
-                'tri-thuc': {
-                    title: '🎓 Trí thức - Chất xúc tác của liên minh',
-                    content: 'Đây là khâu đột phá trong CNH - HĐH. Trí thức đưa khoa học kỹ thuật vào sản xuất nông nghiệp (công nghệ sinh học, giống mới năng suất cao) và công nghiệp (dây chuyền tự động hóa, AI, IoT). Trí thức giúp nông dân trở thành "nông dân công nghệ cao" và giúp công nhân làm chủ các quy trình sản xuất tiên tiến.'
-                }
-            };
-
-            title.textContent = interactions[type].title;
-            content.textContent = interactions[type].content;
-            detail.style.display = 'block';
-        }
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Particle Animation
-        function createParticles() {
-            const particles = document.getElementById('particles');
-            const particleCount = 20;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const star = document.createElement('div');
-                star.className = 'star-particle';
-                star.textContent = '⭐';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 15 + 's';
-                star.style.animationDuration = (15 + Math.random() * 10) + 's';
-                particles.appendChild(star);
-            }
-        }
-
-        createParticles();
-
-        // AI Tools System
-        const aiTools = {
-            summary: {
-                title: '📝 Tóm tắt nội dung',
-                prompt: 'Bạn là chuyên gia về Chủ nghĩa Xã hội Khoa học. Hãy tóm tắt nội dung sau thành các ý chính ngắn gọn, dễ nhớ:\n\n'
-            },
-            explain: {
-                title: '💡 Giải thích khái niệm',
-                prompt: 'Bạn là giáo viên môn Chủ nghĩa Xã hội Khoa học. Hãy giải thích khái niệm sau một cách dễ hiểu, có ví dụ thực tế:\n\n'
-            },
-            quiz: {
-                title: '📋 Tạo câu hỏi ôn tập',
-                prompt: 'Hãy tạo 10 câu hỏi trắc nghiệm (4 phương án A, B, C, D) và 5 câu hỏi tự luận về chủ đề sau trong môn Chủ nghĩa Xã hội Khoa học:\n\n'
-            },
-            essay: {
-                title: '✍️ Soạn bài tiểu luận',
-                prompt: 'Hãy tạo dàn ý chi tiết cho bài tiểu luận về chủ đề sau trong môn Chủ nghĩa Xã hội Khoa học (gồm mở bài, thân bài với các luận điểm, luận cứ, ví dụ, và kết bài):\n\n'
-            },
-            connect: {
-                title: '🔗 Liên hệ thực tiễn',
-                prompt: 'Hãy phân tích và liên hệ lý thuyết sau với thực tiễn Việt Nam hiện nay, đưa ra ví dụ cụ thể:\n\n'
-            },
-            compare: {
-                title: '⚖️ So sánh quan điểm',
-                prompt: 'Hãy so sánh các quan điểm, học thuyết sau trong Chủ nghĩa Xã hội Khoa học (nêu điểm giống, khác, ưu nhược điểm):\n\n'
-            }
-        };
-
-        function openAITool(toolType) {
+        function openAIModal(tool) {
+            currentTool = tool;
             const modal = document.getElementById('aiModal');
-            const modalTitle = document.getElementById('aiModalTitle');
-            const modalBody = document.getElementById('aiModalBody');
-            const aiOutput = document.getElementById('aiOutput');
+            const modalTitle = document.getElementById('modalTitle');
             
+            const titles = {
+                'policy': '🧠 AI Tư Vấn Chính Sách',
+                'economy': '📊 AI Phân Tích Kinh Tế',
+                'education': '📚 AI Giáo Dục Quần Chúng',
+                'agriculture': '🌾 AI Hỗ Trợ Nông Nghiệp'
+            };
+            
+            modalTitle.textContent = titles[tool] || '🤖 Công Cụ AI';
             modal.classList.add('active');
-            modalTitle.textContent = aiTools[toolType].title;
-            aiOutput.classList.remove('active');
             
-            modalBody.innerHTML = `
-                <div class="ai-input-group">
-                    <label>Nhập nội dung cần xử lý:</label>
-                    <textarea id="aiInputText" placeholder="Nhập nội dung, khái niệm hoặc chủ đề bạn muốn AI xử lý..."></textarea>
-                </div>
-                <button class="ai-button" onclick="processAI('${toolType}')">
-                    Xử lý với AI
-                </button>
-            `;
+            // Reset output
+            document.getElementById('output').classList.remove('active');
+            document.getElementById('outputContent').innerHTML = '';
+            document.getElementById('userInput').value = '';
+            
+            // Clear conversation history for new tool
+            conversationHistory.length = 0;
         }
 
         function closeAIModal() {
             document.getElementById('aiModal').classList.remove('active');
         }
 
-        async function processAI(toolType) {
-            const inputText = document.getElementById('aiInputText').value.trim();
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
             
-            if (!inputText) {
-                alert('Vui lòng nhập nội dung!');
-                return;
-            }
-
-            const loading = document.getElementById('aiLoading');
-            const output = document.getElementById('aiOutput');
-            const outputContent = document.getElementById('aiOutputContent');
+            if (!message) return;
             
+            const loading = document.getElementById('loading');
+            const output = document.getElementById('output');
+            const outputContent = document.getElementById('outputContent');
+            const sendButton = document.getElementById('sendButton');
+            
+            // Disable input while processing
+            input.disabled = true;
+            sendButton.disabled = true;
+            
+            // Show loading
             loading.classList.add('active');
             output.classList.remove('active');
-
+            
+            // System prompts for different tools
+            const systemPrompts = {
+                'policy': 'Bạn là một chuyên gia tư vấn chính sách theo chủ nghĩa xã hội khoa học. Phân tích và đề xuất các chính sách dựa trên nguyên tắc công bằng xã hội, phân phối công bằng, và phát triển bền vững. Trả lời bằng tiếng Việt.',
+                'economy': 'Bạn là một nhà kinh tế học chuyên về kinh tế kế hoạch hóa và chủ nghĩa xã hội. Phân tích các vấn đề kinh tế từ góc độ Mác - Lênin, đề xuất giải pháp công bằng và hiệu quả. Trả lời bằng tiếng Việt.',
+                'education': 'Bạn là một giáo viên chuyên về lý thuyết chủ nghĩa Mác - Lênin và chủ nghĩa xã hội khoa học. Giải thích các khái niệm một cách rõ ràng, dễ hiểu, với ví dụ thực tế. Trả lời bằng tiếng Việt.',
+                'agriculture': 'Bạn là một chuyên gia nông nghiệp với kiến thức về canh tác bền vững, hợp tác xã, và phát triển nông thôn. Đưa ra lời khuyên thực tế và khoa học. Trả lời bằng tiếng Việt.'
+            };
+            
+            // Add system message if this is the first message
+            if (conversationHistory.length === 0) {
+                conversationHistory.push({
+                    role: 'system',
+                    content: systemPrompts[currentTool] || 'Bạn là một trợ lý AI hữu ích. Trả lời bằng tiếng Việt.'
+                });
+            }
+            
+            // Add user message to history
+            conversationHistory.push({
+                role: 'user',
+                content: message
+            });
+            
             try {
-                const fullPrompt = aiTools[toolType].prompt + inputText;
-                
-                const response = await fetch("/api/chat", {
-                    method: "POST",
+                // Call API - SỬA ĐƯỜNG DẪN TẠI ĐÂY
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
                     headers: {
-                        "Content-Type": "application/json"
+                        'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        messages: [
-                            {
-                                role: "system",
-                                content: "Bạn là trợ lý AI chuyên về Chủ nghĩa Xã hội Khoa học, đặc biệt là Liên minh Công - Nông - Trí trong công cuộc CNH-HĐH Việt Nam."
-                            },
-                            {
-                                role: "user",
-                                content: fullPrompt
-                            }
-                        ]
+                        messages: conversationHistory
                     })
-                });             
+                });
+
+                // Kiểm tra response status
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || errorData.error || `HTTP error! status: ${response.status}`);
+                }
 
                 const data = await response.json();
+                
                 loading.classList.remove('active');
-
+                
                 if (data.choices && data.choices[0] && data.choices[0].message) {
-                    const result = data.choices[0].message.content;
-                    // Parse markdown for AI output
-                    outputContent.innerHTML = marked.parse(result);
-                    outputContent.classList.add('markdown-content');
-                        output.classList.add('active');
-                } else if (data.error) {
-                    outputContent.innerHTML = `<p style="color: red;">❌ Lỗi API: ${data.error.message || 'Vui lòng kiểm tra lại cấu hình'}</p>`;
+                    const assistantMessage = data.choices[0].message.content;
+                    
+                    // Add assistant response to history
+                    conversationHistory.push({
+                        role: 'assistant',
+                        content: assistantMessage
+                    });
+                    
+                    // Use marked.js to parse markdown
+                    if (typeof marked !== 'undefined') {
+                        outputContent.innerHTML = marked.parse(assistantMessage);
+                    } else {
+                        outputContent.textContent = assistantMessage;
+                    }
+                    
                     output.classList.add('active');
+                    input.value = '';
                 } else {
-                    outputContent.innerHTML = '<p style="color: red;">Đã có lỗi xảy ra. Vui lòng thử lại!</p>';
-                    output.classList.add('active');
+                    throw new Error('Không nhận được phản hồi hợp lệ từ API');
                 }
             } catch (error) {
                 loading.classList.remove('active');
-                outputContent.innerHTML = '<p style="color: red;">❌ Lỗi kết nối! Vui lòng kiểm tra kết nối internet.</p>';
-                output.classList.add('active');
                 console.error('Error:', error);
+                
+                // Hiển thị thông báo lỗi chi tiết hơn
+                let errorMessage = '❌ Đã xảy ra lỗi: ';
+                if (error.message.includes('Failed to fetch')) {
+                    errorMessage += 'Không thể kết nối đến server. Vui lòng kiểm tra:<br>1. GROQ_API_KEY đã được cấu hình trên Vercel chưa?<br>2. Đường dẫn API có đúng không?';
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                outputContent.innerHTML = `<p style="color: red;">${errorMessage}</p>`;
+                output.classList.add('active');
+            } finally {
+                // Re-enable input
+                input.disabled = false;
+                sendButton.disabled = false;
+                input.focus();
             }
         }
 
